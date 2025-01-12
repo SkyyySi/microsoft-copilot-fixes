@@ -1,0 +1,34 @@
+{
+	"manifest_version": 3,
+	"name": "Microsoft Copilot Fixes",
+	"version": "1.0.0",
+	"permissions": [
+		"activeTab",
+		"userScripts"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"https://m365.cloud.microsoft/chat*"
+			],
+			"js": [
+				"build/m365.cloud.microsoft/index.js"
+			],
+			"run_at": "document_idle",
+			"world": "MAIN",
+			"type": "module"
+		},
+		{
+			"matches": [
+				"https://outlook.office.com/hosted/semanticoverview/Users*"
+			],
+			"js": [
+				"build/outlook.office.com/index.js"
+			],
+			"run_at": "document_idle",
+			"world": "MAIN",
+			"type": "module",
+			"all_frames": true
+		}
+	]
+}
