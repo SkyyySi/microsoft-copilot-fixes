@@ -33,21 +33,23 @@ async function main() {
 
 	sidepaneExpandButton.click();
 
+	// FIXME: This should apply syntax highlighting to code blocks, but it
+	// doesn't appear to actually be working.
 	watchForElement<HTMLElement>(
 		`div#app`,
 		`pre > code`,
 		e => {
 			const text = e.innerText;
 
-			let highlightedText: string;
+			let highlightedCode: string;
 			if (highlightedCodeCache.has(text)) {
-				highlightedText = highlightedCodeCache.get(text)!;
+				highlightedCode = highlightedCodeCache.get(text)!;
 			} else {
-				highlightedText = hljs.highlightAuto(text).value;
-				highlightedCodeCache.set(text, highlightedText);
+				highlightedCode = hljs.highlightAuto(text).value;
+				highlightedCodeCache.set(text, highlightedCode);
 			}
 
-			e.innerHTML = highlightedText;
+			e.innerHTML = highlightedCode;
 		},
 	);
 }
